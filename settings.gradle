@@ -1,3 +1,4 @@
 rootProject.name = 'java-demos'
 include 'simple'
+include 'web'
 
