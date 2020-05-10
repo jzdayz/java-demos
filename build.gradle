@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'org.springframework.boot' version '2.2.6.RELEASE' apply false
 }
 
 subprojects {
@@ -16,9 +16,9 @@ subprojects {
         mavenCentral()
     }
 
-
     if (Objects.equals(project.name,"simple")){
         dependencies {
+            implementation 'com.google.guava:guava:29.0-jre'
             implementation 'net.java.dev.jna:jna:5.5.0'
             implementation 'org.jooq:jool-java-8:0.9.14'
             implementation 'io.atlassian.fugue:fugue:4.7.1'
@@ -27,6 +27,9 @@ subprojects {
     }
 
     if (Objects.equals(project.name,"web")){
+
+        apply plugin: 'org.springframework.boot'
+
         dependencies {
             implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.2'
             implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -37,6 +40,18 @@ subprojects {
             imports {
                 mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
             }
+        }
+    }
+
+    configurations {
+        compileClasspath.resolutionStrategy {
+            eachDependency { DependencyResolveDetails details ->
+                //specifying a fixed version for all libraries with 'org.gradle' group
+                if (details.getRequested().module == 'com.google.guava:guava') {
+                    details.useVersion '29.0-jre'
+               }
+            }
+
         }
     }
 }
