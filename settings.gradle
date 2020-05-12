@@ -1,4 +1,6 @@
 rootProject.name = 'java-demos'
 include 'simple'
 include 'web'
+include 'spring-cloud-config-server'
+include 'spring-cloud-config-client'
 

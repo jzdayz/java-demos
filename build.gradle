@@ -5,6 +5,7 @@ plugins {
 
 subprojects {
 
+
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
 
@@ -14,6 +15,10 @@ subprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    ext {
+        set('springCloudVersion', "Hoxton.SR4")
     }
 
     if (Objects.equals(project.name,"simple")){
@@ -46,6 +51,36 @@ subprojects {
             }
         }
     }
+
+    def cloud = ['spring-cloud-config-server','spring-cloud-config-client']
+    if (cloud.contains(project.name)){
+
+        apply plugin: 'org.springframework.boot'
+
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+        }
+
+        if (Objects.equals(project.name,"spring-cloud-config-client")){
+
+            dependencies {
+                implementation 'org.springframework.boot:spring-boot-starter-actuator'
+                implementation 'org.springframework.boot:spring-boot-starter-web'
+                implementation 'org.springframework.cloud:spring-cloud-starter-config'
+            }
+        }
+
+        if (Objects.equals(project.name,"spring-cloud-config-server")){
+
+            dependencies {
+                implementation 'org.springframework.cloud:spring-cloud-config-server'
+            }
+        }
+
+    }
+
 
     configurations {
         compileClasspath.resolutionStrategy {
