@@ -18,6 +18,7 @@ subprojects {
 
     repositories {
         mavenCentral()
+        jcenter()
     }
 
     ext {
@@ -34,6 +35,9 @@ subprojects {
     // ==============================================================================
     if (Objects.equals(project.name,"simple")){
         dependencies {
+            implementation 'com.alibaba:fastjson:1.2.68'
+            implementation 'com.netflix.conductor:conductor-client:2.26.1'
+            implementation 'com.github.vmg.protogen:protogen-annotations:1.0.0'
             implementation 'org.apache.zookeeper:zookeeper:3.6.1'
             implementation 'mysql:mysql-connector-java:5.1.49'
             implementation 'com.alibaba:QLExpress:3.2.0'
@@ -45,6 +49,13 @@ subprojects {
             implementation 'net.java.dev.jna:jna:5.5.0'
             implementation 'org.jooq:jool-java-8:0.9.14'
             implementation 'io.atlassian.fugue:fugue:4.7.1'
+            implementation 'org.springframework.boot:spring-boot'
+        }
+
+        dependencyManagement {
+            imports {
+                mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+            }
         }
     }
 
