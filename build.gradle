@@ -25,6 +25,8 @@ subprojects {
     }
 
     dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.12'
+        annotationProcessor 'org.projectlombok:lombok:1.18.12'
         implementation 'org.codehaus.groovy:groovy:2.5.9'
         implementation "org.jetbrains.kotlin:kotlin-stdlib"
     }
@@ -32,6 +34,7 @@ subprojects {
     // ==============================================================================
     if (Objects.equals(project.name,"simple")){
         dependencies {
+            implementation 'org.apache.zookeeper:zookeeper:3.6.1'
             implementation 'mysql:mysql-connector-java:5.1.49'
             implementation 'com.alibaba:QLExpress:3.2.0'
             implementation 'org.apache.commons:commons-vfs2:2.6.0'

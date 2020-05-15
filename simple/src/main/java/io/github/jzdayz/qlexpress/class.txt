@@ -1,0 +1,36 @@
+    package io.github.jzdayz.myclass;
+    import io.github.jzdayz.qlexpress.Named;
+
+    @Named("科目")
+    private static class Project1{
+        @Named("语文")
+        private int ywScore;
+        @Named("数学")
+        private int sxScore;
+        @Named("英语")
+        private int yyScore;
+
+        public int getYwScore() {
+            return ywScore;
+        }
+
+        public void setYwScore(int ywScore) {
+            this.ywScore = ywScore;
+        }
+
+        public int getSxScore() {
+            return sxScore;
+        }
+
+        public void setSxScore(int sxScore) {
+            this.sxScore = sxScore;
+        }
+
+        public int getYyScore() {
+            return yyScore;
+        }
+
+        public void setYyScore(int yyScore) {
+            this.yyScore = yyScore;
+        }
+    }
