@@ -18,7 +18,11 @@ public class Application {
 		Worker worker2 = new SampleWorker("task2");
 
 		// Create TaskRunnerConfigurer
-		TaskRunnerConfigurer configurer = new TaskRunnerConfigurer.Builder(taskClient, Arrays.asList(worker1, worker2))
+		TaskRunnerConfigurer configurer = new TaskRunnerConfigurer.Builder(taskClient,
+				Arrays.asList(
+						worker1,
+						worker2
+				))
 				.withThreadCount(threadCount)
 				.build();
 

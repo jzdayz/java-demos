@@ -29,7 +29,7 @@ public class SampleWorker implements Worker {
 		if (taskDefName.equals("task1")){
 			result.getOutputData().put("tt","arg");
 		}else{
-			System.err.println(result.getOutputData().get("tt"));
+			System.err.println(task.getInputData().get("arg"));
 		}
 
 		//Register the output of the task
