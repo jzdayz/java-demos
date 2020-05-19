@@ -35,6 +35,10 @@ subprojects {
     // ==============================================================================
     if (Objects.equals(project.name,"simple")){
         dependencies {
+            implementation 'org.jooq:jooq:3.13.2'
+            implementation 'org.jooq:jooq-meta:3.13.2'
+            implementation 'org.jooq:jooq-codegen:3.13.2'
+            implementation 'org.springframework:spring-jdbc:5.2.6.RELEASE'
             implementation 'com.alibaba:fastjson:1.2.68'
             implementation 'com.netflix.conductor:conductor-client:2.26.1'
             implementation 'com.github.vmg.protogen:protogen-annotations:1.0.0'
