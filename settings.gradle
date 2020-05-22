@@ -3,4 +3,5 @@ include 'simple'
 include 'web'
 include 'spring-cloud-config-server'
 include 'spring-cloud-config-client'
+include 'spring-cloud-alibaba-discovery'
 

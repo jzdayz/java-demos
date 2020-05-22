@@ -23,6 +23,7 @@ subprojects {
 
     ext {
         set('springCloudVersion', "Hoxton.SR4")
+        set('springCloudAlibabaVersion', "2.2.1.RELEASE")
     }
 
     dependencies {
@@ -76,6 +77,23 @@ subprojects {
         dependencyManagement {
             imports {
                 mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+            }
+        }
+    }
+
+    if (Objects.equals(project.name,"spring-cloud-alibaba-discovery")){
+
+        apply plugin: 'org.springframework.boot'
+
+        dependencies {
+            implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+            implementation 'org.springframework.boot:spring-boot-starter-web'
+            implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        }
+
+        dependencyManagement {
+            imports {
+                mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
             }
         }
     }
