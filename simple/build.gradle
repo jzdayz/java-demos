@@ -1,3 +1,6 @@
+
+apply plugin: 'com.google.protobuf'
+
 dependencies {
     implementation 'org.apache.commons:commons-digester3:3.2'
     implementation 'org.jooq:jooq:3.13.2'
@@ -21,4 +24,31 @@ dependencies {
     implementation 'io.atlassian.fugue:fugue:4.7.1'
     implementation 'org.springframework.boot:spring-boot'
     implementation 'io.minio:minio:7.0.2'
+    implementation 'io.grpc:grpc-netty-shaded:1.29.0'
+    implementation 'io.grpc:grpc-protobuf:1.29.0'
+    implementation 'io.grpc:grpc-stub:1.29.0'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.11.0"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.29.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
 }
