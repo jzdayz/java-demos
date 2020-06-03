@@ -27,6 +27,9 @@ dependencies {
     implementation 'io.grpc:grpc-netty-shaded:1.29.0'
     implementation 'io.grpc:grpc-protobuf:1.29.0'
     implementation 'io.grpc:grpc-stub:1.29.0'
+    implementation 'org.hibernate:hibernate-core:5.4.17.Final'
+    implementation 'org.freemarker:freemarker:2.3.30'
+    implementation 'org.hibernate:hibernate-entitymanager:5.4.17.Final'
 }
 
 sourceSets {

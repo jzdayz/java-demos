@@ -1,0 +1,49 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "${table.tableName}" table = "${table.tableName}">
+
+        <meta attribute = "class-description">
+            This class contains the employee detail.
+        </meta>
+
+                <comment>${table.comment}</comment>
+
+<!--id要在前面-->
+
+        <#list table.columns! as column>
+
+                <#if column.id>
+                <id name = "${column.name}" type = "${column.type}" length = "${column.length}">
+<column name="${column.name}">
+                        <comment>${column.comment}</comment>
+                    </column>
+                </id>
+            </#if>
+            </#list>
+
+
+        <#list table.columns! as column>
+
+        <#if column.id>
+        <#else>
+        <property name = "${column.name}" type = "${column.type}" length = "${column.length}" not-null="${column.notNull?string('true', 'false')}" unique="${column.unique?string('true', 'false')}"
+
+            <#if column.unique>
+            unique-key="${column.uniqueKey}"
+             </#if>
+        >
+        <column name="${column.name}">
+                        <comment>${column.comment}</comment>
+                    </column>
+        </property>
+    </#if>
+    </#list>
+
+
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "TEST" table = "TEST">
+
+        <meta attribute = "class-description">
+            This class contains the employee detail.
+        </meta>
+
+
+
+        <id name = "id" type = "int" column = "id" length = "20" >
+
+        </id>
+        <property name = "name" column = "name" type = "string" length = "100"  not-null="true" unique="true" unique-key="T">
+
+        </property>
+
+
+    </class>
+</hibernate-mapping>
