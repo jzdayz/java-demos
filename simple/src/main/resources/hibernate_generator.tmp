@@ -17,9 +17,9 @@
         <#list table.columns! as column>
 
                 <#if column.id>
-                <id name = "${column.name}" type = "${column.type}" length = "${column.length}">
-<column name="${column.name}">
-                        <comment>${column.comment}</comment>
+                <id name = "${column.name}" type = "${column.type}" >
+<column name="${column.name}" length = "${column.length}">
+                        <comment>${column.comment!}</comment>
                     </column>
                 </id>
             </#if>
@@ -37,7 +37,7 @@
              </#if>
         >
         <column name="${column.name}" length="${column.length}">
-                        <comment>${column.comment}</comment>
+                        <comment>${column.comment!}</comment>
                     </column>
         </property>
     </#if>

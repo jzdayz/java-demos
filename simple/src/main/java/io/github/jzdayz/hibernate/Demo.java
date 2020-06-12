@@ -48,7 +48,7 @@ public class Demo {
                         Column.builder().unique(false).notNull(true).comment("名称").length(100).name("name").type("string").uniqueKey("TTT").build(),
                         Column.builder().unique(true).uniqueKey("DDDSSS").comment("U名称").length(100).name("u_name").type("string").build(),
                         Column.builder().comment("U日期").length(100).name("u_date").type("date").build(),
-                        Column.builder().comment("主键ID").length(20).name("id").type("int").id(true).build()
+                        Column.builder().length(211).name("id").type("string").id(true).build()
                 )
         ).build();
         generate(MY_SQL_8_DIALECT,ta);
@@ -149,7 +149,7 @@ public class Demo {
         temp.process(map,new OutputStreamWriter(byteArrayOutputStream, StandardCharsets.UTF_8));
 
         byte[] buf = byteArrayOutputStream.toByteArray();
-        log.info("数据->{}",new String(buf));
+//        log.info("数据->{}",new String(buf));
         return new ByteArrayInputStream(buf);
     }
 }
