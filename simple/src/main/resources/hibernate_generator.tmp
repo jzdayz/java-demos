@@ -30,13 +30,13 @@
 
         <#if column.id>
         <#else>
-        <property name = "${column.name}" type = "${column.type}" length = "${column.length}" not-null="${column.notNull?string('true', 'false')}" unique="${column.unique?string('true', 'false')}"
+        <property name = "${column.name}" type = "${column.type}" not-null="${column.notNull?string('true', 'false')}" unique="${column.unique?string('true', 'false')}"
 
             <#if column.unique>
             unique-key="${column.uniqueKey}"
              </#if>
         >
-        <column name="${column.name}">
+        <column name="${column.name}" length="${column.length}">
                         <comment>${column.comment}</comment>
                     </column>
         </property>

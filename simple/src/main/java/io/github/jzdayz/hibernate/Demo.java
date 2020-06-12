@@ -149,7 +149,7 @@ public class Demo {
         temp.process(map,new OutputStreamWriter(byteArrayOutputStream, StandardCharsets.UTF_8));
 
         byte[] buf = byteArrayOutputStream.toByteArray();
-//        log.info("数据->{}",new String(buf));
+        log.info("数据->{}",new String(buf));
         return new ByteArrayInputStream(buf);
     }
 }

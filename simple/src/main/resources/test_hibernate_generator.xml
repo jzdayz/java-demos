@@ -15,7 +15,7 @@
 
         </id>
         <property name = "name" column = "name" type = "string" length = "100"  not-null="true" unique="true" unique-key="T">
-
+            <column name="" length=""></column>
         </property>
 
 
