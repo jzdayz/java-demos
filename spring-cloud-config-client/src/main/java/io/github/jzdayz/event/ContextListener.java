@@ -8,15 +8,16 @@ import org.springframework.core.env.Environment;
 @Configuration
 public class ContextListener implements ApplicationListener<EnvironmentChangeEvent> {
 
-    private Environment environment;
+  private Environment environment;
 
 
-    public ContextListener(Environment environment) {
-        this.environment = environment;
-    }
+  public ContextListener(Environment environment) {
+    this.environment = environment;
+  }
 
-    @Override
-    public void onApplicationEvent(EnvironmentChangeEvent event) {
-        System.err.println(environment.getProperty("info.foo"));;
-    }
+  @Override
+  public void onApplicationEvent(EnvironmentChangeEvent event) {
+    System.err.println(environment.getProperty("info.foo"));
+    ;
+  }
 }

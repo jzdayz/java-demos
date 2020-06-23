@@ -18,30 +18,31 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
- 
 
-    @Bean(value = "defaultApi2")
-    public Docket defaultApi2() {
-        Docket docket=new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                //分组名称
-                .groupName("版本2.2.2.2")
-                .select()
-                //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("io.github.jzdayz"))
-                .paths(PathSelectors.any())
-                .build();
-        return docket;
-    }
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("swagger-bootstrap-ui RESTful APIs")
-                .description("swagger-bootstrap-ui")
-                .termsOfServiceUrl("http://localhost:8999/")
-                .contact("developer@mail.com")
-                .version("1.0")
-                .build();
-    }
+
+  @Bean(value = "defaultApi2")
+  public Docket defaultApi2() {
+    Docket docket = new Docket(DocumentationType.SWAGGER_2)
+        .apiInfo(apiInfo())
+        //分组名称
+        .groupName("版本2.2.2.2")
+        .select()
+        //这里指定Controller扫描包路径
+        .apis(RequestHandlerSelectors.basePackage("io.github.jzdayz"))
+        .paths(PathSelectors.any())
+        .build();
+    return docket;
+  }
+
+  private ApiInfo apiInfo() {
+    return new ApiInfoBuilder()
+        .title("swagger-bootstrap-ui RESTful APIs")
+        .description("swagger-bootstrap-ui")
+        .termsOfServiceUrl("http://localhost:8999/")
+        .contact("developer@mail.com")
+        .version("1.0")
+        .build();
+  }
 
 
 }

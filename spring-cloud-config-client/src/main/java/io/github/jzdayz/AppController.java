@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class AppController {
 
-    @Value("${info.foo}")
-    private String fooProperty;
+  @Value("${info.foo}")
+  private String fooProperty;
 
-    @Autowired
-    private ContextRefresher re;
+  @Autowired
+  private ContextRefresher re;
 
-    @RequestMapping("/")
-    public String hello() {
-        return "Using [" + fooProperty + "] from config server";
-    }
+  @RequestMapping("/")
+  public String hello() {
+    return "Using [" + fooProperty + "] from config server";
+  }
 
 //    @RequestMapping("/refresh")
 //    public String hello1() {

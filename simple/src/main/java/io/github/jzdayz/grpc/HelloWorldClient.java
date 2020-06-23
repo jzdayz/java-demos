@@ -28,31 +28,20 @@ import java.util.logging.Logger;
  * A simple client that requests a greeting from the {@link HelloWorldServer}.
  */
 public class HelloWorldClient {
+
   private static final Logger logger = Logger.getLogger(HelloWorldClient.class.getName());
 
   private final GreeterGrpc.GreeterBlockingStub blockingStub;
 
-  /** Construct client for accessing HelloWorld server using the existing channel. */
+  /**
+   * Construct client for accessing HelloWorld server using the existing channel.
+   */
   public HelloWorldClient(Channel channel) {
     // 'channel' here is a Channel, not a ManagedChannel, so it is not this code's responsibility to
     // shut it down.
 
     // Passing Channels to code makes code easier to test and makes it easier to reuse Channels.
     blockingStub = GreeterGrpc.newBlockingStub(channel);
-  }
-
-  /** Say hello to server. */
-  public void greet(String name) {
-    logger.info("Will try to greet " + name + " ...");
-    HelloRequest request = HelloRequest.newBuilder().setName(name).build();
-    HelloReply response;
-    try {
-      response = blockingStub.sayHello(request);
-    } catch (StatusRuntimeException e) {
-      logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
-      return;
-    }
-    logger.info("Greeting: " + response.getMessage());
   }
 
   /**
@@ -95,5 +84,21 @@ public class HelloWorldClient {
       // again leave it running.
       channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
     }
+  }
+
+  /**
+   * Say hello to server.
+   */
+  public void greet(String name) {
+    logger.info("Will try to greet " + name + " ...");
+    HelloRequest request = HelloRequest.newBuilder().setName(name).build();
+    HelloReply response;
+    try {
+      response = blockingStub.sayHello(request);
+    } catch (StatusRuntimeException e) {
+      logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus());
+      return;
+    }
+    logger.info("Greeting: " + response.getMessage());
   }
 }

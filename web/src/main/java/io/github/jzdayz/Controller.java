@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
-    @ApiOperation("这个是个简答的测试")
-    @GetMapping
-    public Object test(String name){
-        return name;
-    }
+  @ApiOperation("这个是个简答的测试")
+  @GetMapping
+  public Object test(String name) {
+    return name;
+  }
 
 }

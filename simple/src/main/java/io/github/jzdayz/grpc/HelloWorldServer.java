@@ -27,9 +27,19 @@ import java.util.logging.Logger;
  * Server that manages startup/shutdown of a {@code Greeter} server.
  */
 public class HelloWorldServer {
+
   private static final Logger logger = Logger.getLogger(HelloWorldServer.class.getName());
 
   private Server server;
+
+  /**
+   * Main launches the server from the command line.
+   */
+  public static void main(String[] args) throws IOException, InterruptedException {
+    final HelloWorldServer server = new HelloWorldServer();
+    server.start();
+    server.blockUntilShutdown();
+  }
 
   private void start() throws IOException {
     /* The port on which the server should run */
@@ -67,15 +77,6 @@ public class HelloWorldServer {
     if (server != null) {
       server.awaitTermination();
     }
-  }
-
-  /**
-   * Main launches the server from the command line.
-   */
-  public static void main(String[] args) throws IOException, InterruptedException {
-    final HelloWorldServer server = new HelloWorldServer();
-    server.start();
-    server.blockUntilShutdown();
   }
 
   static class GreeterImpl extends GreeterGrpc.GreeterImplBase {
