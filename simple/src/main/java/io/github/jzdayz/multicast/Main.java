@@ -11,8 +11,8 @@ public class Main {
 
   private static String address = "225.0.0.2";
 
-  static{
-    System.setProperty("java.net.preferIPv4Stack","true");
+  static {
+    System.setProperty("java.net.preferIPv4Stack", "true");
   }
 
   public static void main(String[] args) throws Exception {

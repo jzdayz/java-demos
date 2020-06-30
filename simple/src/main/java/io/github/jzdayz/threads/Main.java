@@ -6,23 +6,23 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-  public static void main(String[] args) throws Exception{
-    Thread a = new Thread(()->{
+  public static void main(String[] args) throws Exception {
+    Thread a = new Thread(() -> {
       try {
         TimeUnit.DAYS.sleep(1);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      System.err.println(Thread.currentThread().getName()+" done");
+      System.err.println(Thread.currentThread().getName() + " done");
     });
 
-    Thread b = new Thread(()->{
+    Thread b = new Thread(() -> {
       try {
         TimeUnit.DAYS.sleep(1);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      System.err.println(Thread.currentThread().getName()+" done");
+      System.err.println(Thread.currentThread().getName() + " done");
     });
 
     a.setName("a");
@@ -31,12 +31,11 @@ public class Main {
     a.start();
     b.start();
 
-
     List<Thread> threads = ThreadUtils.getThreads();
     threads.forEach(System.out::println);
     for (Thread thread : threads) {
       // 杀掉名称为a的线程
-      if (Objects.equals("a",thread.getName())){
+      if (Objects.equals("a", thread.getName())) {
         // 不推荐 stop,最好是中断,如果需要强制停掉,stop也尚可
 //        thread.stop();
         thread.interrupt();
