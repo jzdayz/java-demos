@@ -73,12 +73,20 @@ public class Controller {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream);
         while ((entry = zipInputStream.getNextEntry()) != null){
+            if (filter(entry.getName())){
+                continue;
+            }
+
             System.out.println("fileName:" + entry.getName());
             String data = StreamUtils.copyToString(zipInputStream, Charset.defaultCharset());
 
             System.out.println(data);
-            out.putNextEntry(new ZipEntry(entry.getName()));
-            StreamUtils.copy((data+"UPDATE").getBytes(),out);
+            ZipEntry e = new ZipEntry(entry.getName());
+            out.putNextEntry(e);
+            if (!e.isDirectory()) {
+                StreamUtils.copy((data + "UPDATE").getBytes(), out);
+                System.out.println("写入数据");
+            }
         }
         out.flush();
         out.close();
@@ -96,6 +104,13 @@ public class Controller {
                     }
                 }, headers, HttpStatus.OK);
 
+    }
+
+    private boolean filter(String name){
+        if (name.contains(".DS_Store") || name.startsWith("__MACOSX")){
+            return true;
+        }
+        return false;
     }
 
 }
