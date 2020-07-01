@@ -1,0 +1,9 @@
+POST http://localhost:8081/test2
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="ab.zip"
+Content-Type: application/zip
+
+< ab.zip
+--WebAppBoundary--
