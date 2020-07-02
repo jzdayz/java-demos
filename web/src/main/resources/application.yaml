@@ -1,2 +1,10 @@
 server:
   port: 8081
+
+spring:
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 1397649957@qq.com
+    password: x
+    default-encoding: UTF-8
