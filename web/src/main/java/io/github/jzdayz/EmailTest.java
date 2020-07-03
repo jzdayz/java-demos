@@ -21,7 +21,7 @@ public class EmailTest implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         MimeMessageHelper helper = new MimeMessageHelper(sender.createMimeMessage(),true,"utf-8");
         helper.setFrom(mailProperties.getUsername());
-        helper.setTo("1537775310@qq.com");
+        helper.setTo("huqingfeng@wondersgroup.com");
         helper.setSubject("TEST");
         helper.setText("test text");
         helper.addAttachment("abbbb.xlsx",new ClassPathResource("/a.xlsx"));

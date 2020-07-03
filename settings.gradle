@@ -7,4 +7,5 @@ include 'spring-cloud-alibaba-discovery'
 include 'dubbo:dubbo-api'
 include 'dubbo:dubbo-provider'
 include 'dubbo:dubbo-consumer'
+include 'spring-boot-test'
 

@@ -16,7 +16,7 @@ subprojects {
     version '0.0.1'
 
     def cloud = ['spring-cloud-config-server','spring-cloud-config-client']
-    def boot = ['spring-cloud-config-server','spring-cloud-config-client','web','spring-cloud-alibaba-discovery']
+    def boot = ['spring-boot-test','spring-cloud-config-server','spring-cloud-config-client','web','spring-cloud-alibaba-discovery']
 
     repositories {
         mavenCentral()
@@ -29,6 +29,7 @@ subprojects {
     }
 
     dependencies {
+        implementation 'com.google.guava:guava:29.0-jre'
         compileOnly 'org.projectlombok:lombok:1.18.12'
         annotationProcessor 'org.projectlombok:lombok:1.18.12'
         implementation 'org.codehaus.groovy:groovy:2.5.9'
