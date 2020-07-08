@@ -1,5 +1,5 @@
 dependencies {
-//    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.2'
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.4'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
 }

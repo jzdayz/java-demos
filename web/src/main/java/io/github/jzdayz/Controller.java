@@ -1,8 +1,8 @@
 package io.github.jzdayz;
 
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,13 +26,13 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-//@Api("测试类")
+@Api("测试")
 @RestController
 public class Controller {
 
-//    @ApiOperation("这个是个简答的测试")
+    @ApiOperation("api测试")
     @GetMapping
-    public Object test(String name) {
+    public Object test(@ApiParam(name = "名称",required = true) String name) {
         return name;
     }
 
