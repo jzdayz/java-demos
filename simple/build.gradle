@@ -9,6 +9,7 @@ dependencies {
     implementation 'com.oracle.ojdbc:ojdbc8:19.3.0.0'
     implementation 'com.baomidou:mybatis-plus:3.0.7'
     implementation 'org.jooq:jooq:3.13.2'
+    implementation 'io.projectreactor.netty:reactor-netty:0.9.10.RELEASE'
     implementation 'com.zaxxer:HikariCP:3.4.5'
     implementation 'org.jooq:jooq-meta:3.13.2'
     implementation 'org.jooq:jooq-codegen:3.13.2'
