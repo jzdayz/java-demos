@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -29,6 +31,17 @@ import java.util.zip.ZipOutputStream;
 @Api("测试")
 @RestController
 public class Controller {
+
+
+    @GetMapping("/test/date")
+    public Object testDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date){
+        return date;
+    }
+
+    @GetMapping("/test/date2")
+    public Object testDate2(@SimpleDate Date date){
+        return date;
+    }
 
     @ApiOperation("api测试")
     @GetMapping
