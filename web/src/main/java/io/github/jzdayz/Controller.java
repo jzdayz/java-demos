@@ -3,13 +3,16 @@ package io.github.jzdayz;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StreamUtils;
+import org.springframework.util.concurrent.ListenableFutureTask;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,15 +26,43 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 @Api("测试")
 @RestController
+@Slf4j
 public class Controller {
 
+
+    private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
+            1,1,1L, TimeUnit.HOURS,new ArrayBlockingQueue<>(100)
+    );
+
+    @GetMapping("/async")
+    public Object async(){
+        log.info(" async invoke ");
+        ListenableFutureTask<Object> objectListenableFutureTask = new ListenableFutureTask<>(() -> {
+            TimeUnit.SECONDS.sleep(1L);
+
+            log.info(" async handle ");
+            return Arrays.asList("111","sfsff");
+        });
+        THREAD_POOL_EXECUTOR.submit(objectListenableFutureTask);
+        return objectListenableFutureTask;
+    }
+
+    @Secured("ALL")
+    @GetMapping("/test/security")
+    public Object res(){
+        return "1";
+    }
 
     @GetMapping("/test/date")
     public Object testDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date){
