@@ -13,13 +13,13 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class Demo {
-    
+
     public static void main(String[] args) {
 //        httpServer();
 //        tcpClient();
         httpClient();
     }
-    
+
     private static void httpClient() {
         HttpClient client = HttpClient.create().port(80).baseUrl("http://baidu.com");
         client.get()
@@ -28,18 +28,18 @@ public class Demo {
                 .log()
                 .blockLast();
     }
-    
+
     private static void tcpClient() {
         Connection connection = TcpClient.create().host("baidu.com").port(80)
                 .doOnConnected(conn -> conn.addHandler(new ReadTimeoutHandler(10, TimeUnit.SECONDS)))
-                .handle((in,out)->{
-                     in.receive().asString().log().doOnEach(e-> System.out.println(e.get()));
-                     return Mono.empty();
+                .handle((in, out) -> {
+                    in.receive().asString().log().doOnEach(e -> System.out.println(e.get()));
+                    return Mono.empty();
                 })
                 .connectNow();
         connection.onDispose().block();
     }
-    
+
     private static void httpServer() {
         DisposableServer server = HttpServer.create().host("0.0.0.0").port(9991).route(routes -> routes
                 .get("/hello", (request, response) -> response.sendString(Mono.just("Hello World!")))
@@ -49,5 +49,5 @@ public class Demo {
                 .bindNow();
         server.onDispose().block();
     }
-    
+
 }

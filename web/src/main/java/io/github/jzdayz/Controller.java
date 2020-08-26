@@ -42,17 +42,17 @@ public class Controller {
 
 
     private static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
-            1,1,1L, TimeUnit.HOURS,new ArrayBlockingQueue<>(100)
+            1, 1, 1L, TimeUnit.HOURS, new ArrayBlockingQueue<>(100)
     );
 
     @GetMapping("/async")
-    public Object async(){
+    public Object async() {
         log.info(" async invoke ");
         ListenableFutureTask<Object> objectListenableFutureTask = new ListenableFutureTask<>(() -> {
             TimeUnit.SECONDS.sleep(1L);
 
             log.info(" async handle ");
-            return Arrays.asList("111","sfsff");
+            return Arrays.asList("111", "sfsff");
         });
         THREAD_POOL_EXECUTOR.submit(objectListenableFutureTask);
         return objectListenableFutureTask;
@@ -60,28 +60,29 @@ public class Controller {
 
     @Secured("ALL")
     @GetMapping("/test/security")
-    public Object res(){
+    public Object res() {
         return "1";
     }
 
     @GetMapping("/test/date")
-    public Object testDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date){
+    public Object testDate(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return date;
     }
 
     @GetMapping("/test/date2")
-    public Object testDate2(@SimpleDate Date date){
+    public Object testDate2(@SimpleDate Date date) {
         return date;
     }
 
     @ApiOperation("api测试")
     @GetMapping
-    public Object test(@ApiParam(name = "名称",required = true) String name) {
+    public Object test(@ApiParam(name = "名称", required = true) String name) {
         return name;
     }
 
     /**
-     *  下载文件
+     * 下载文件
+     *
      * @return
      */
     @GetMapping("/test1")
@@ -94,14 +95,15 @@ public class Controller {
                 (output) -> {
                     try (
                             InputStream inputStream = res.getInputStream();
-                            ){
+                    ) {
                         StreamUtils.copy(inputStream, output);
                     }
                 }, headers, HttpStatus.OK);
     }
 
     /**
-     *  操作zip文件的内容
+     * 操作zip文件的内容
+     *
      * @param file
      * @return
      * @throws IOException
@@ -117,8 +119,8 @@ public class Controller {
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ZipOutputStream out = new ZipOutputStream(byteArrayOutputStream);
-        while ((entry = zipInputStream.getNextEntry()) != null){
-            if (filter(entry.getName())){
+        while ((entry = zipInputStream.getNextEntry()) != null) {
+            if (filter(entry.getName())) {
                 continue;
             }
 
@@ -142,17 +144,17 @@ public class Controller {
         headers.add(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
         return new ResponseEntity<>(
                 (output) -> {
-                    try{
+                    try {
                         StreamUtils.copy(byteArrayOutputStream.toByteArray(), output);
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }, headers, HttpStatus.OK);
 
     }
 
-    private boolean filter(String name){
-        if (name.contains(".DS_Store") || name.startsWith("__MACOSX")){
+    private boolean filter(String name) {
+        if (name.contains(".DS_Store") || name.startsWith("__MACOSX")) {
             return true;
         }
         return false;

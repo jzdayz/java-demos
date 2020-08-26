@@ -2,7 +2,7 @@ package io.github.jzdayz.groovy
 
 import org.springframework.beans.factory.BeanFactory
 
-class Demo{
+class Demo {
 
     private BeanFactory beanFactory;
 
@@ -10,7 +10,7 @@ class Demo{
         this.beanFactory = beanFactory
     }
 
-    static void pi(def str){
-        
+    static void pi(def str) {
+
     }
 }

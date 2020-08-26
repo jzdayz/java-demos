@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Tests {
 
     public static void main(String[] args) {
-        SpringApplication.run(Tests.class,args);
+        SpringApplication.run(Tests.class, args);
     }
 
 }

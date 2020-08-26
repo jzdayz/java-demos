@@ -22,11 +22,11 @@ public class ResourceTests implements ApplicationRunner {
 //        test1();
     }
 
-    private void test1() throws Exception{
+    private void test1() throws Exception {
         URL url = new URL("https://www.baidu.com/");
         try (
                 InputStream inputStream = url.openStream()
-                ){
+        ) {
             System.out.println(StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8));
         }
     }

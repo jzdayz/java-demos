@@ -27,9 +27,9 @@ import java.util.*;
  * @since 2016-07-07
  */
 @Intercepts({
-    @Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
-    @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
-    @Signature(type = StatementHandler.class, method = "batch", args = {Statement.class})
+        @Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
+        @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
+        @Signature(type = StatementHandler.class, method = "batch", args = {Statement.class})
 })
 public class PerformanceInterceptor implements Interceptor {
 
@@ -103,7 +103,7 @@ public class PerformanceInterceptor implements Interceptor {
                 e.printStackTrace();
             }
         } else if (T4CPreparedStatement.equals(stmtClassName)
-            || OraclePreparedStatementWrapper.equals(stmtClassName)) {
+                || OraclePreparedStatementWrapper.equals(stmtClassName)) {
             try {
                 if (oracleGetOriginalSqlMethod != null) {
                     Object stmtSql = oracleGetOriginalSqlMethod.invoke(statement);
@@ -147,10 +147,10 @@ public class PerformanceInterceptor implements Interceptor {
         MetaObject metaObject = SystemMetaObject.forObject(target);
         MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
         StringBuilder formatSql = new StringBuilder()
-            .append(" Time：").append(timing)
-            .append(" ms - ID：").append(ms.getId())
-            .append(StringPool.NEWLINE).append("Execute SQL：")
-            .append(SqlUtils.sqlFormat(originalSql, format)).append(StringPool.NEWLINE);
+                .append(" Time：").append(timing)
+                .append(" ms - ID：").append(ms.getId())
+                .append(StringPool.NEWLINE).append("Execute SQL：")
+                .append(SqlUtils.sqlFormat(originalSql, format)).append(StringPool.NEWLINE);
         if (this.isWriteInLog()) {
             if (this.getMaxTime() >= 1 && timing > this.getMaxTime()) {
                 logger.error(formatSql.toString());
@@ -160,7 +160,7 @@ public class PerformanceInterceptor implements Interceptor {
         } else {
             System.err.println(formatSql.toString());
             Assert.isFalse(this.getMaxTime() >= 1 && timing > this.getMaxTime(),
-                " The SQL execution time is too large, please optimize ! ");
+                    " The SQL execution time is too large, please optimize ! ");
         }
         return result;
     }

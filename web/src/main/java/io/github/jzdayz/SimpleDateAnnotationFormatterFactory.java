@@ -5,7 +5,10 @@ import org.springframework.format.Parser;
 import org.springframework.format.Printer;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SimpleDateAnnotationFormatterFactory implements AnnotationFormatterFactory<SimpleDate> {
     @Override

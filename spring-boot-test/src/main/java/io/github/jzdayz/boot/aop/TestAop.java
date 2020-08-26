@@ -25,11 +25,12 @@ public class TestAop implements ApplicationRunner {
             return invocation.proceed();
         });
         A proxy = (A) proxyFactory.getProxy();
-        System.out.println(proxy.doSomething("111111"));;
+        System.out.println(proxy.doSomething("111111"));
+        ;
     }
 
-    public static class A{
-        public String doSomething(String show){
+    public static class A {
+        public String doSomething(String show) {
             return show;
         }
     }

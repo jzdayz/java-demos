@@ -8,18 +8,18 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 @Slf4j
 public class Demo {
 
-  public static void main(String[] args) {
-    Configurations configs = new Configurations();
-    try {
-      Configuration config = configs.properties(
-          // load from classpath
-          "apache/configuration2/test.properties"
-      );
-      // access configuration properties
-      log.info("a: {} , b: {} , c: {}",
-          config.getString("a"),config.getString("b"),config.getString("c"));
-    } catch (ConfigurationException cex) {
-      // Something went wrong
+    public static void main(String[] args) {
+        Configurations configs = new Configurations();
+        try {
+            Configuration config = configs.properties(
+                    // load from classpath
+                    "apache/configuration2/test.properties"
+            );
+            // access configuration properties
+            log.info("a: {} , b: {} , c: {}",
+                    config.getString("a"), config.getString("b"), config.getString("c"));
+        } catch (ConfigurationException cex) {
+            // Something went wrong
+        }
     }
-  }
 }

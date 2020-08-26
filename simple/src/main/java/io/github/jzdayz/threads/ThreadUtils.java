@@ -6,11 +6,11 @@ import java.util.List;
 
 public class ThreadUtils {
 
-  public static List<Thread> getThreads() throws Exception {
-    Method getThreads = Thread.class.getDeclaredMethod("getThreads");
-    getThreads.setAccessible(true);
-    Thread[] threads = (Thread[]) getThreads.invoke(null);
-    return Arrays.asList(threads);
-  }
+    public static List<Thread> getThreads() throws Exception {
+        Method getThreads = Thread.class.getDeclaredMethod("getThreads");
+        getThreads.setAccessible(true);
+        Thread[] threads = (Thread[]) getThreads.invoke(null);
+        return Arrays.asList(threads);
+    }
 
 }

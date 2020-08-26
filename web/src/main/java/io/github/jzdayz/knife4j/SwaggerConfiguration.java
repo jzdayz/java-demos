@@ -19,11 +19,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
- 
+
 
     @Bean(value = "defaultApi2")
     public Docket defaultApi2() {
-        Docket docket=new Docket(DocumentationType.SWAGGER_2)
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(ApiInfo.DEFAULT)
                 //分组名称
                 .groupName("2.X版本")

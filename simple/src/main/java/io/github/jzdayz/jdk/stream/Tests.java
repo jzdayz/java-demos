@@ -6,7 +6,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
 public class Tests {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         List<String> s = new ArrayList<>();
         s.add("1");
         s.add("2");
@@ -19,8 +19,9 @@ public class Tests {
         forkJoinPool.submit(() -> s.parallelStream().forEach((number) -> {
             try {
                 Thread.sleep(5);
-            } catch (InterruptedException e) { }
-            System.out.println(Thread.currentThread()+"--"+number);
+            } catch (InterruptedException e) {
+            }
+            System.out.println(Thread.currentThread() + "--" + number);
         }));
         TimeUnit.HOURS.sleep(1L);
     }

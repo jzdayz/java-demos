@@ -19,12 +19,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Test {
 
     private final static ThreadPoolExecutor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(
-      1,1,1L, TimeUnit.HOURS,new ArrayBlockingQueue<>(100)
+            1, 1, 1L, TimeUnit.HOURS, new ArrayBlockingQueue<>(100)
     );
 
     private static Undertow undertow = null;
 
-    public static class MyServlet implements Servlet{
+    public static class MyServlet implements Servlet {
 
         @Override
         public void init(ServletConfig config) throws ServletException {
@@ -41,10 +41,10 @@ public class Test {
         @Override
         public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
             AsyncContext asyncContext = null;
-            if (i.get() == 0){
+            if (i.get() == 0) {
                 asyncContext = req.startAsync();
             }
-            log.info("进入"+i.get()+" "+req.getRemotePort());
+            log.info("进入" + i.get() + " " + req.getRemotePort());
             i.addAndGet(1);
             if (i.get() == 1) {
                 AsyncContext finalAsyncContext = asyncContext;
@@ -58,7 +58,8 @@ public class Test {
                         e.printStackTrace();
                     }
                 });
-            }{
+            }
+            {
                 log.info("1111");
                 res.getWriter().println("ME");
                 i.set(0);

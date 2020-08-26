@@ -1,8 +1,6 @@
 package io.github.jzdayz.jdk.stream;
 
 
-import java.util.Objects;
-import java.util.concurrent.ForkJoinPool;
 import java.util.stream.Stream;
 
 public class StreamTests {
@@ -12,7 +10,7 @@ public class StreamTests {
 
         Stream.of("1", "2", "3", "4")
                 .parallel()
-                .forEachOrdered(k->{
+                .forEachOrdered(k -> {
                     System.out.println(k);
                     System.out.println(Thread.currentThread().getName());
                 });

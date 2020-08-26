@@ -4,9 +4,7 @@ import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.MySQLIndexHint;
 import net.sf.jsqlparser.expression.SQLServerHints;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
-import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
-import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.select.Pivot;
 import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.select.UnPivot;
@@ -17,7 +15,7 @@ public class Demo {
     public static void main(String[] args) throws Exception {
         // 修改sql语句的表名
         String sql = "select * from test b";
-        Select select = (Select)CCJSqlParserUtil.parse(sql);
+        Select select = (Select) CCJSqlParserUtil.parse(sql);
 
         ExpressionDeParser expressionDeParser = new ExpressionDeParser();
         StringBuilder buffer = new StringBuilder();
