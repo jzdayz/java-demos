@@ -19,7 +19,7 @@ public class Demo {
 
         final String tmp = "UPDATE TBL_PEOPLEINFO set ST_WORKID = '%s' where ST_WORKID = '%s';";
         final String tmp1 =
-                "UPDATE TBL_DEPHISINFO set ST_COMPANYNAME_LDGX = '四川万信数字科技有限公司' , ST_COMPANY_LDGX = '0000001098' where ST_ID = (\n"
+                "UPDATE TBL_DEPHISINFO set ST_COMPANYNAME_LDGX = '' , ST_COMPANY_LDGX = '' where ST_ID = (\n"
                         +
                         "\tselect ST_ID from TBL_DEPHISINFO where ST_PERSONID = (\n" +
                         "\t\tselect ST_ID from TBL_PEOPLEINFO where ST_WORKID = '%s'\n" +

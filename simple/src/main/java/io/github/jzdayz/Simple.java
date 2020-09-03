@@ -1,20 +1,32 @@
 package io.github.jzdayz;
 
+import lombok.extern.slf4j.Slf4j;
+
+@SuppressWarnings("ConstantConditions")
+@Slf4j
 public class Simple {
 
     public static void main(String[] args) {
-        String sql = "id, project_id, project_name, project_simple_name, project_num, job_number, job_name, project_belong_id, project_belong_name, project_status, operate_time, create_time, modify_time, seal_company, seal_company_name, sale_contract_info_id, contract_number, contract_name, total_plan_fee, total_plan_people, is_antecedent, project_start_date, pre_maintain_end_date, project_type_id, project_type_name, user_id, dept_id, is_delete";
+        String sql = "id, project_id, plan_type, plan_status, plan_audit_person_id, plan_audit_person_name, plan_version, deleted, create_time, modify_time,owner_user_id,owner_dep_id,approve_time,approve_opinion";
 
 
         String[] a = sql.split(",");
 
-        final String prefix = "c.";
+        final String prefix = "";
+        final String asPrefix = "overview";
 
         StringBuilder sb = new StringBuilder();
         for (final String s : a) {
-            sb.append(prefix).append("`").append(s.trim()).append("`").append(",");
+            sb.append(prefix).append("`").append(s.trim()).append("`");
+            if (asPrefix.length() > 0) {
+                sb.append(" as ").append(asPrefix).append("_").append(s.trim());
+            }
+            sb.append(",");
         }
-        System.out.println(sb);
+        sb.deleteCharAt(sb.length()-1);
+        log.info("==========================================================");
+        log.info("\n{}",sb);
+        log.info("==========================================================");
     }
 
 }

@@ -26,7 +26,6 @@ public class TestAop implements ApplicationRunner {
         });
         A proxy = (A) proxyFactory.getProxy();
         System.out.println(proxy.doSomething("111111"));
-        ;
     }
 
     public static class A {
