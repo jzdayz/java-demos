@@ -33,7 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
- *
+ * 生成DDL
  */
 @Slf4j
 public class Demo {
@@ -65,7 +65,7 @@ public class Demo {
                         .applySetting("hibernate.dialect", dialect.getClass())
                         .build());
 
-//        metadata.addAnnotatedClass(A.class);
+//        metadata.addAnnotatedClass(TestBean.class);
 //        try (
 //                InputStream resourceAsStream = Demo.class.getClassLoader().getResourceAsStream("test_hibernate_generator.xml");
 //        ){

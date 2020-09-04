@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Demo {
 
+    @SuppressWarnings("UnstableApiUsage")
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = new ThreadPoolExecutor(
                 1, 1, 10L, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100),

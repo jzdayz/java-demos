@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 @Table(appliesTo = "A", comment = "测试")
-public class A {
+public class TestBean {
 
     @Id
     @GeneratedValue

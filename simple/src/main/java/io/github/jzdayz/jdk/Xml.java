@@ -19,7 +19,16 @@ public class Xml {
         System.err.println(xmlSql("aa"));;
     }
 
-    public static String xmlSql(String id) throws ParserConfigurationException, IOException, SAXException {
+    public static String xmlSql(String id){
+        try {
+            return xmlSqlEx(id);
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String xmlSqlEx(String id) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(false);
         factory.setIgnoringElementContentWhitespace(true);

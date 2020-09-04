@@ -33,7 +33,6 @@ public class SqlUtils {
 
     private final static SqlFormatter SQL_FORMATTER = new SqlFormatter();
 
-
     /**
      * 格式sql
      *
