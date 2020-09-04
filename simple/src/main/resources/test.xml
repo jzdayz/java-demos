@@ -1,0 +1,3 @@
+<sql id="aa">
+    select 1 from a
+</sql>
