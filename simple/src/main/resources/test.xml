@@ -1,3 +1,14 @@
-<sql id="insert">
-    insert into test values (null,'11111111')
-</sql>
+<xml>
+    <sql id="sql1">
+        select CASE
+        WHEN ISNUMERIC(empcode) = 1 THEN CONVERT(VARCHAR(10), SUBSTRING('0000', 0, 5 - LEN(empcode))) + empcode
+        ELSE empcode
+        END AS empcode from interface_empinfo where flag_sm = '1'
+    </sql>
+    <sql id="sql2">
+        select * from WONDERS_HR.TBL_PEOPLEINFO where ST_ISSECRET = 'YES_NO_1' and NM_REMOVED = '0'
+    </sql>
+    <sql id="mysqlTest">
+        update test set name = ? where id = ?
+    </sql>
+</xml>
