@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.PathResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,18 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.concurrent.ListenableFutureTask;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -59,10 +55,10 @@ public class Controller {
         return objectListenableFutureTask;
     }
 
-    @GetMapping("/**")
-    public Object ip(HttpServletRequest request){
-        return request.getRemoteAddr();
-    }
+//    @GetMapping("/**")
+//    public Object ip(HttpServletRequest request){
+//        return request.getRemoteAddr();
+//    }
 
 //    @Secured("ALL")
     @GetMapping("/test/security")
@@ -96,6 +92,28 @@ public class Controller {
         ClassPathResource res = new ClassPathResource("/application.yaml");
         MultiValueMap<String, String> headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=application.yaml");
+        headers.add(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
+        return new ResponseEntity<>(
+                (output) -> {
+                    try (
+                            InputStream inputStream = res.getInputStream();
+                    ) {
+                        StreamUtils.copy(inputStream, output);
+                    }
+                }, headers, HttpStatus.OK);
+    }
+
+
+    /**
+     * 下载文件
+     *
+     * @return
+     */
+    @RequestMapping("/dl")
+    public ResponseEntity<StreamingResponseBody> dl(String path) throws UnsupportedEncodingException {
+        PathResource res = new PathResource(path);
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename="+ URLEncoder.encode(res.getFilename(),"UTF-8"));
         headers.add(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
         return new ResponseEntity<>(
                 (output) -> {
