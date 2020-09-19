@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,33 @@ import java.util.stream.Collectors;
 public class SQL {
 
     public static void main(String[] args) {
-        main3();
+        main4();
+    }
+
+    private static void main4() {
+        HikariDataSource hikariDataSource;
+        final String user = "";
+        final String pwd = "1qaz@wsx";
+        final String className = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        final String url = "jdbc:sqlserver://";
+        hikariDataSource = new HikariDataSource();
+        hikariDataSource.setUsername(user);
+        hikariDataSource.setPassword(pwd);
+        hikariDataSource.setJdbcUrl(url);
+        hikariDataSource.setDriverClassName(className);
+        JdbcTemplate r = new JdbcTemplate(hikariDataSource);
+        try {
+            List<Map<String, Object>> check1 = r.queryForList(Xml.xmlSql("check1"));
+            List<Map<String, Object>> check2 = r.queryForList(Xml.xmlSql("check2"));
+
+            Set<Object> d = check1.stream().map(k -> k.get("wddepid")).collect(Collectors.toSet());
+            List<Object> rs = check2.get(0).values().stream().filter(k -> !d.contains(k)).collect(Collectors.toList());
+            System.out.println(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            hikariDataSource.close();
+        }
+
     }
 
     private static void main3() {
@@ -97,7 +124,7 @@ public class SQL {
         HikariDataSource hikariDataSource = null;
         try {
             final String user = "root";
-            final String pwd = "123123123";
+            final String pwd = "JKLjkl123";
             final String className = "com.p6spy.engine.spy.P6SpyDriver";
             final String url = "jdbc:p6spy:mysql://jzdayz.club:3306/test?useSSL=false";
             hikariDataSource = new HikariDataSource();
