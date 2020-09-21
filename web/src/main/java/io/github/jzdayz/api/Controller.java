@@ -1,5 +1,6 @@
-package io.github.jzdayz;
+package io.github.jzdayz.api;
 
+import io.github.jzdayz.config.SimpleDate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -53,17 +53,6 @@ public class Controller {
         });
         THREAD_POOL_EXECUTOR.submit(objectListenableFutureTask);
         return objectListenableFutureTask;
-    }
-
-//    @GetMapping("/**")
-//    public Object ip(HttpServletRequest request){
-//        return request.getRemoteAddr();
-//    }
-
-//    @Secured("ALL")
-    @GetMapping("/test/security")
-    public Object res() {
-        return "1";
     }
 
     @GetMapping("/test/date")

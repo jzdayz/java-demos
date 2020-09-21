@@ -1,4 +1,4 @@
-package io.github.jzdayz;
+package io.github.jzdayz.config;
 
 import org.springframework.format.AnnotationFormatterFactory;
 import org.springframework.format.Parser;
