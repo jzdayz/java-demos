@@ -24,4 +24,7 @@
         '0000000777','0000001037','0000000776','0000001050',
         '0000001075','0000001076','0000001077','0000001078','0000001079','0000001080'
     </sql>
+    <sql id="s1">
+        SELECT column_name FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME='v_cd_project'
+    </sql>
 </xml>

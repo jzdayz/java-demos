@@ -18,7 +18,25 @@ import java.util.stream.Collectors;
 public class SQL {
 
     public static void main(String[] args) {
-        main4();
+        main5();
+    }
+
+    private static void main5() {
+        HikariDataSource hikariDataSource = new HikariDataSource();
+        hikariDataSource.setUsername("sa");
+        hikariDataSource.setPassword("ding!@");
+        hikariDataSource.setJdbcUrl("jdbc:sqlserver://");
+        hikariDataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        JdbcTemplate r = new JdbcTemplate(hikariDataSource);
+        try {
+            final String prefix = "project";
+            List<String> s1 = r.queryForList(Xml.xmlSql("s1"), String.class);
+            String rs = s1.stream().map(k -> prefix + "." + k + " as '" + prefix + "." + k + "' ").collect(Collectors.joining(","));
+            System.out.println(rs);
+        } catch (Exception e) {
+            e.printStackTrace();
+            hikariDataSource.close();
+        }
     }
 
     private static void main4() {
