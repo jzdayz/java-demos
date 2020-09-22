@@ -6,11 +6,9 @@ import com.lmax.disruptor.util.DaemonThreadFactory;
 
 import java.nio.ByteBuffer;
 
-public class LongEventMain
-{
+public class LongEventMain {
     @SuppressWarnings("BusyWait")
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         // Specify the size of the ring buffer, must be power of 2.
         int bufferSize = 1024;
 
@@ -27,10 +25,9 @@ public class LongEventMain
         RingBuffer<LongEvent> ringBuffer = disruptor.getRingBuffer();
 
         ByteBuffer bb = ByteBuffer.allocate(8);
-        for (long l = 0; true; l++)
-        {
+        for (long l = 0; true; l++) {
             bb.putLong(0, l);
-            ringBuffer.publishEvent((event, sequence, buffer) -> event.set(buffer.getLong(0)), bb);
+            ringBuffer.publishEvent((event, sequence, buffer) -> event.setValue(buffer.getLong(0)), bb);
             Thread.sleep(1000);
         }
     }
