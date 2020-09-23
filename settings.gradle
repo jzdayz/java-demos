@@ -1,4 +1,4 @@
-rootProject.name = 'java-demos'
+rootProject.name = 'java-simples'
 include 'simple'
 include 'web'
 include 'spring-cloud-config-server'
