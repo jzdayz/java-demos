@@ -2,6 +2,8 @@ package io.github.jzdayz.alibaba.sentinel;
 
 import com.alibaba.csp.sentinel.Entry;
 import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.context.Context;
+import com.alibaba.csp.sentinel.context.ContextUtil;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
@@ -23,15 +25,35 @@ public class Demo {
     private static void initFlowRules() {
         List<FlowRule> rules = new ArrayList<>();
         FlowRule rule = new FlowRule();
-        rule.setResource("HelloWorld");
+        rule.setResource("context1");
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         // Set limit QPS to 20.
-        rule.setCount(20);
+        rule.setCount(1);
         rules.add(rule);
         FlowRuleManager.loadRules(rules);
     }
 
     public static void main(String[] args) {
+        main2();
+    }
+
+    private static void main2() {
+        try {
+            Context context=ContextUtil.enter("context1");
+            Entry entry=SphU.entry("A");
+            Entry entry1=SphU.entry("B");
+            entry1.exit();
+            entry.exit();
+            ContextUtil.exit();
+        } catch (BlockException ex) {
+            // 处理被流控的逻辑
+            System.out.println("blocked!");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void main1() {
         // 配置规则.
         initFlowRules();
 
@@ -45,7 +67,7 @@ public class Demo {
                 System.out.println("blocked!");
             }
             try {
-                TimeUnit.SECONDS.sleep(1L);
+                TimeUnit.MILLISECONDS.sleep(100L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
