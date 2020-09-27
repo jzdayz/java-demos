@@ -1,29 +1,34 @@
 package io.github.jzdayz.jdk.concurrent;
 
 import lombok.AllArgsConstructor;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.RecursiveTask;
 
+@Slf4j
 public class ForkJoinTest {
+
+    static {
+        // 设置一下公用的线程池的大小
+        System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "1");
+    }
 
 
     public static void main(String[] args) {
-        test1();
+//        ForkJoinPool.commonPool().execute(() -> {
+//            try {
+//                TimeUnit.DAYS.sleep(1L);
+//            } catch (InterruptedException e) {
+//                log.error(e.getLocalizedMessage(), e);
+//            }
+//        });
+        new PageTask(1, 100).compute();
     }
-
-    private static void test1() {
-
-        new A(1,100).compute();
-
-        CONTAINER.stream().sorted().forEach(k-> System.out.println(k.toString()));
-    }
-
-    public static List<Integer> CONTAINER = new CopyOnWriteArrayList<>();
 
     @AllArgsConstructor
-    public static class A extends RecursiveTask<Integer> {
+    @ToString
+    public static class PageTask extends RecursiveTask<Integer> {
         private int start;
         private int end;
         final static int THRESHOLD = 1;
@@ -31,14 +36,19 @@ public class ForkJoinTest {
 
         public Integer compute() {
             if ((end - start) <= THRESHOLD) {
-                System.out.println("查询数据页码:"+end);
-                CONTAINER.add(end);
+                log.info("数据页码：{}", end);
                 return null;
             } else {
+                /**
+                 *  forkJoin思想
+                 *  将任务分尝试分发出去，如果分发失败，则在当前线程进行处理
+                 */
                 int middle = (start + end) / 2;
-                A left = new A(start, middle);
-                A right = new A(middle, end);
+                PageTask left = new PageTask(start, middle);
+                PageTask right = new PageTask(middle, end);
+                // 将任务尝试分发出去
                 right.fork();
+                // 如果这个任务，没有别的线程领走的话，就在当前线程进行处理
                 right.join();
                 left.compute();
                 return null;
