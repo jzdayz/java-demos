@@ -17,7 +17,7 @@ subprojects {
     version '0.0.1'
 
     def cloud = ['spring-cloud-config-server', 'spring-cloud-config-client']
-    def boot = ['spring-boot-test', 'spring-cloud-config-server', 'spring-cloud-config-client', 'web', 'spring-cloud-alibaba-discovery']
+    def boot = [/*'spring-boot-test', */'spring-cloud-config-server', 'spring-cloud-config-client', 'web', 'spring-cloud-alibaba-discovery']
 
     repositories {
         mavenCentral()
