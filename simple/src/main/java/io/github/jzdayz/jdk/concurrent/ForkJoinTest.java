@@ -4,7 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 public class ForkJoinTest {
@@ -16,15 +23,35 @@ public class ForkJoinTest {
 
 
     public static void main(String[] args) {
-//        ForkJoinPool.commonPool().execute(() -> {
-//            try {
-//                TimeUnit.DAYS.sleep(1L);
-//            } catch (InterruptedException e) {
-//                log.error(e.getLocalizedMessage(), e);
-//            }
-//        });
+        test1();
+    }
+
+    private static void test1() {
+        ForkJoinPool.commonPool().execute(() -> {
+            try {
+                TimeUnit.DAYS.sleep(1L);
+            } catch (InterruptedException e) {
+                log.error(e.getLocalizedMessage(), e);
+            }
+        });
         new PageTask(1, 100).compute();
     }
+
+    private static void test2() {
+        List<Object> r = IntStream.range(50, 100).parallel().mapToObj((i) -> {
+            // 查询数据
+            log.info("MAP");
+            List<Object> rs = new ArrayList<>();
+            rs.add(new Object());
+            return rs;
+        }).collect(Collectors.toList()).stream().reduce((a, b) -> {
+            log.info("REDUCE");
+            a.addAll(b);
+            return a;
+        }).orElse(Collections.emptyList());
+        log.info("count:{}",r.size());
+    }
+
 
     @AllArgsConstructor
     @ToString
