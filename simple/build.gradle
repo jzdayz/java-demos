@@ -3,6 +3,8 @@ apply plugin: 'net.ltgt.apt-idea'
 
 
 dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.0.3'
     implementation 'org.quartz-scheduler:quartz:2.3.2'
     implementation 'org.apache.commons:commons-configuration2:2.7'
     implementation 'commons-beanutils:commons-beanutils:1.9.4'
