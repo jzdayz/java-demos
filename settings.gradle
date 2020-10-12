@@ -1,6 +1,6 @@
 rootProject.name = 'java-simples'
 include 'simple'
-include 'web'
+include 'spring-webmvc'
 include 'spring-cloud-config-server'
 include 'spring-cloud-config-client'
 include 'spring-cloud-alibaba-discovery'
@@ -8,4 +8,5 @@ include 'dubbo:dubbo-api'
 include 'dubbo:dubbo-provider'
 include 'dubbo:dubbo-consumer'
 include 'spring-boot-test'
+include 'spring-webflux'
 

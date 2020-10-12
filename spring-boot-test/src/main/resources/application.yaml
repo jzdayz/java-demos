@@ -7,3 +7,6 @@ spring:
   banner:
     image:
       location: classpath:android-chrome-192x192.png
+test:
+  schedule:
+    delay: 9000

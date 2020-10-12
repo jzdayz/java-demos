@@ -16,8 +16,18 @@ subprojects {
     group 'io.github.jzdayz'
     version '0.0.1'
 
-    def cloud = ['spring-cloud-config-server', 'spring-cloud-config-client']
-    def boot = [/*'spring-boot-test', */'spring-cloud-config-server', 'spring-cloud-config-client', 'web', 'spring-cloud-alibaba-discovery']
+    def cloud = [
+            'spring-cloud-config-server',
+            'spring-cloud-config-client'
+    ]
+    def boot = [
+            /*'spring-boot-test', */
+            'spring-cloud-config-server',
+            'spring-cloud-config-client',
+            'spring-webflux',
+            'spring-webmvc',
+            'spring-cloud-alibaba-discovery'
+    ]
 
     repositories {
         mavenCentral()
@@ -25,6 +35,7 @@ subprojects {
     }
 
     ext {
+        //noinspection SpellCheckingInspection
         set('springCloudVersion', "Hoxton.SR4")
         set('springCloudAlibabaVersion', "2.2.1.RELEASE")
     }
@@ -39,6 +50,7 @@ subprojects {
 
     dependencyManagement {
         imports {
+            //noinspection UnnecessaryQualifiedReference
             mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
             mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"

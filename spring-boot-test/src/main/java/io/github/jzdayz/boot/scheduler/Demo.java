@@ -12,7 +12,7 @@ public class Demo {
         SpringApplication.run(Demo.class);
     }
 
-    @Scheduled(cron = "* * * * * ?")
+    @Scheduled(cron = "* * * * * ?",initialDelayString = "${test.schedule.delay}")
     public void test(){
         System.out.println(1);
     }
