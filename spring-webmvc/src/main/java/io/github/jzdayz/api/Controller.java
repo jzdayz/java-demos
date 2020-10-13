@@ -35,6 +35,7 @@ import java.util.zip.ZipOutputStream;
 @Api("测试")
 @RestController
 @Slf4j
+@RequestMapping("api")
 public class Controller {
 
 
