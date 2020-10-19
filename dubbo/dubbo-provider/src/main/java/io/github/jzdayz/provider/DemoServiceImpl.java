@@ -1,7 +1,7 @@
 package io.github.jzdayz.provider;
 
 
-import io.github.jzdayz.api.DemoService;
+import io.github.jzdayz.simple.api.DemoService;
 
 public class DemoServiceImpl implements DemoService {
 

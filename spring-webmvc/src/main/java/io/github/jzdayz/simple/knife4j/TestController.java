@@ -1,13 +1,11 @@
-package io.github.jzdayz.knife4j;
+package io.github.jzdayz.simple.knife4j;
 
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @SuppressWarnings("SpellCheckingInspection")

@@ -1,6 +1,6 @@
 package io.github.jzdayz.provider;
 
-import io.github.jzdayz.api.DemoService;
+import io.github.jzdayz.simple.api.DemoService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Consumer {

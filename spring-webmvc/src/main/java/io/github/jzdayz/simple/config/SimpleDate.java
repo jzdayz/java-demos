@@ -1,4 +1,4 @@
-package io.github.jzdayz.config;
+package io.github.jzdayz.simple.config;
 
 
 import java.lang.annotation.*;

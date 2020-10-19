@@ -1,6 +1,6 @@
-package io.github.jzdayz.api;
+package io.github.jzdayz.simple.api;
 
-import io.github.jzdayz.config.SimpleDate;
+import io.github.jzdayz.simple.config.SimpleDate;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

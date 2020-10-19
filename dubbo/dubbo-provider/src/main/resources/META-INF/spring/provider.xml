@@ -13,5 +13,5 @@
     <!-- service implementation, as same as regular local bean -->
     <bean id="demoService" class="io.github.jzdayz.provider.DemoServiceImpl"/>
     <!-- declare the service interface to be exported -->
-    <dubbo:service interface="io.github.jzdayz.api.DemoService" ref="demoService"/>
+    <dubbo:service interface="io.github.jzdayz.simple.api.DemoService" ref="demoService"/>
 </beans>

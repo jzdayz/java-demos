@@ -1,4 +1,4 @@
-package io.github.jzdayz.knife4j;
+package io.github.jzdayz.simple.knife4j;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;

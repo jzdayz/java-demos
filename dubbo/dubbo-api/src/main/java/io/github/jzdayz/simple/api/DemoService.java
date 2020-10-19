@@ -1,4 +1,4 @@
-package io.github.jzdayz.api;
+package io.github.jzdayz.simple.api;
 
 public interface DemoService {
 
