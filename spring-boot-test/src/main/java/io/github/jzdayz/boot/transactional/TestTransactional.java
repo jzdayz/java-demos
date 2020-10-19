@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
-public class TransactionalTests {
+public class TestTransactional {
     public static void main(String[] args) {
         try (
-                ConfigurableApplicationContext context = SpringApplication.run(TransactionalTests.class)
+                ConfigurableApplicationContext context = SpringApplication.run(TestTransactional.class)
                 ){
             test1(context);
         }

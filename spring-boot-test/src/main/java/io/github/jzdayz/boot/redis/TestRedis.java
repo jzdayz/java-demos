@@ -17,7 +17,7 @@ import java.util.stream.IntStream;
 
 @SpringBootApplication
 @Slf4j
-public class RedisTests {
+public class TestRedis {
 
     static final DefaultRedisScript<String> RS = new DefaultRedisScript<>();
 
@@ -28,7 +28,7 @@ public class RedisTests {
 
     public static void main(String[] args) {
         try (
-                ConfigurableApplicationContext context = SpringApplication.run(RedisTests.class, args)
+                ConfigurableApplicationContext context = SpringApplication.run(TestRedis.class, args)
                 ){
             test1(context);
         }

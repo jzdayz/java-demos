@@ -7,9 +7,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @EnableScheduling
 @SpringBootApplication
-public class Demo {
+public class TestScheduler {
     public static void main(String[] args) {
-        SpringApplication.run(Demo.class);
+        SpringApplication.run(TestScheduler.class);
     }
 
     @Scheduled(cron = "* * * * * ?",initialDelayString = "${test.schedule.delay}")

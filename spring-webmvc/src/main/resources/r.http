@@ -7,3 +7,5 @@ Content-Type: application/zip
 
 < ab.zip
 --WebAppBoundary--
+###
+GET http://10.1.98.240:8080/interface/Entrance.jsp?otherPageUrlString=dXNlcm5hbWU9MTEmcGFzc3dvcmQ9MTEmbG9naW50eXBlX3N5c3BhcmFtPTEmaWQ9dGVzdCZvcGVyYXRpb25UeXBlPXRlc3Q=&operationType=test&username=11&password=11&logintype_sysparam=1&id=test&operationType=test

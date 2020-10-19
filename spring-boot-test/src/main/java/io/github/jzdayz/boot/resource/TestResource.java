@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 @AllArgsConstructor
-public class ResourceTests implements ApplicationRunner {
+public class TestResource implements ApplicationRunner {
 
     private ResourceLoader resourceLoader;
 
