@@ -1,6 +1,5 @@
 package io.github.jzdayz.test;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,13 @@ public class ApiController {
     @GetMapping("login")
     @ResponseBody
     public Object test2(HttpServletRequest request){
+        return "OK";
+    }
+
+    @GetMapping("test/cache")
+    @ResponseBody
+    public Object test3(HttpServletResponse response){
+        response.setHeader(HttpHeaders.CACHE_CONTROL,"public, max-age=31295475");
         return "OK";
     }
 
