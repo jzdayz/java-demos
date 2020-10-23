@@ -79,6 +79,8 @@ subprojects {
 }
 
 allprojects {
+    apply from: "${project.rootDir}${File.separator}version.gradle"
+
     compileJava {
         options.compilerArgs << '-XDignore.symbol.file'
         options.fork = true

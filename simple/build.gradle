@@ -1,6 +1,9 @@
 apply plugin: 'com.google.protobuf'
 apply plugin: 'net.ltgt.apt-idea'
 
+compileJava {
+
+}
 
 dependencies {
     implementation 'com.aliyun.oss:aliyun-sdk-oss:3.11.1'
