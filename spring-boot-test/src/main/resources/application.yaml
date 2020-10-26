@@ -4,9 +4,9 @@ spring:
     database: 0
     port: 6379
     timeout: 1H
-  banner:
-    image:
-      location: classpath:banner.png
+#  banner:
+#    image:
+#      location: classpath:banner.png
 test:
   schedule:
     delay: 9000

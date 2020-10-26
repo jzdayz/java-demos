@@ -1,0 +1,15 @@
+jar {
+    manifest.attributes["Premain-Class"] =
+            "io.github.jzdayz.instrument.InstrumentMain"
+    manifest.attributes["Can-Redefine-Classes"] = "true"
+    manifest.attributes["Can-Retransform-Classes"] = "true"
+    manifest.attributes["Can-Set-Native-Method-Prefix"] = "false"
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    implementation 'org.javassist:javassist:3.27.0-GA'
+}

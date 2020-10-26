@@ -10,4 +10,5 @@ include 'dubbo:dubbo-consumer'
 include 'spring-boot-test'
 include 'spring-webflux'
 include 'spring-security'
+include 'java-agent'
 
