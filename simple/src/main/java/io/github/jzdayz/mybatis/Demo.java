@@ -14,13 +14,14 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
         try (HikariDataSource ds = new HikariDataSource()) {
-            ds.setJdbcUrl("jdbc:mysql://jzdayz.club:3306/test?useSSL=false");
+            ds.setJdbcUrl("jdbc:mysql://localhost:3306/test?useSSL=false");
             ds.setUsername("root");
-            ds.setPassword("123123123");
+            ds.setPassword("JKLjkl123");
             TransactionFactory transactionFactory = new JdbcTransactionFactory();
             Environment environment = new Environment("development", transactionFactory, ds);
             Configuration configuration = new Configuration(environment);
@@ -41,8 +42,10 @@ public class Demo {
                     SqlSession sqlSession = sqlSessionFactory.openSession();
             ) {
                 TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
-                List<Test> all = mapper.all();
-                System.out.println(all);
+//                List<Test> all = mapper.all();
+//                System.out.println(all);
+                Map<String, Map<String, Object>> map = mapper.map(1);
+                System.out.println(map);
             }
         }
     }
