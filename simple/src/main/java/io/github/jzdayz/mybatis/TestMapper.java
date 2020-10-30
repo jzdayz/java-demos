@@ -14,4 +14,6 @@ public interface TestMapper {
     @MapKey("id")
     Map<String,Map<String,Object>> map(Integer id);
 
+    boolean insert(Test test);
+
 }

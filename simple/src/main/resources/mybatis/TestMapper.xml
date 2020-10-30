@@ -9,4 +9,7 @@
     <select id="map" resultType="map">
         select * from test where id = #{id}
     </select>
+    <insert id="insert" parameterType="io.github.jzdayz.mybatis.Test" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `test`.`test`(`id`, `name`) VALUES (null, #{name});
+    </insert>
 </mapper>

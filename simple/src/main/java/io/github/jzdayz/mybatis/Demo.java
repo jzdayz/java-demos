@@ -42,10 +42,9 @@ public class Demo {
                     SqlSession sqlSession = sqlSessionFactory.openSession();
             ) {
                 TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
-//                List<Test> all = mapper.all();
-//                System.out.println(all);
-                Map<String, Map<String, Object>> map = mapper.map(1);
-                System.out.println(map);
+                Test test = new Test();
+                mapper.insert(test);
+                System.out.println(test.getId());
             }
         }
     }
