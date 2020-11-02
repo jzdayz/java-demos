@@ -3,18 +3,13 @@ package io.github.jzdayz.mybatis;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.builder.xml.XMLMapperBuilder;
 import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.*;
 import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
@@ -39,12 +34,29 @@ public class Demo {
 
 
             try (
-                    SqlSession sqlSession = sqlSessionFactory.openSession();
+                    SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)
             ) {
                 TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
-                Test test = new Test();
-                mapper.insert(test);
-                System.out.println(test.getId());
+//                Test test1 = new Test();
+//                test1.setName("name");
+//                mapper.insertBase(test1);
+//                Test test2 = new Test();
+//                test2.setName1("name1");
+//                mapper.insertBase(test2);
+                for (int i = 0; i < 190000; i++) {
+                    Test a = new Test();
+                    a.setName(i + "1111");
+                    a.setName1(i + "2222");
+                    mapper.insertBase(a);
+                    if (i % 2000 == 0) {
+                        sqlSession.flushStatements();
+                        System.out.println("flush");
+                    }
+                }
+                sqlSession.flushStatements();
+                sqlSession.commit();
+//                System.out.println(test1.getId());
+//                System.out.println(test2.getId());
             }
         }
     }

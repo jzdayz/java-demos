@@ -16,4 +16,7 @@ public interface TestMapper {
 
     boolean insert(Test test);
 
+
+    boolean insertBase(Test test);
+
 }

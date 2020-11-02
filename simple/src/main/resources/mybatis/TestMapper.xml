@@ -12,4 +12,19 @@
     <insert id="insert" parameterType="io.github.jzdayz.mybatis.Test" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `test`.`test`(`id`, `name`) VALUES (null, #{name});
     </insert>
+
+    <insert id="insertBase">
+        INSERT INTO test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="name1 != null">name1,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="name1 != null">#{name1},</if>
+        </trim>
+    </insert>
 </mapper>
