@@ -9,13 +9,10 @@ public interface TestMapper {
 
     List<Test> all();
 
-
-
     @MapKey("id")
     Map<String,Map<String,Object>> map(Integer id);
 
     boolean insert(Test test);
-
 
     boolean insertBase(Test test);
 
