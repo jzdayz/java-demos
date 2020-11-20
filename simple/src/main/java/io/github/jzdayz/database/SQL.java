@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import io.github.jzdayz.jdk.Xml;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,26 @@ import java.util.stream.Collectors;
 public class SQL {
 
     public static void main(String[] args) {
-        main5();
+        main6();
+    }
+
+    private static void main6() {
+        HikariDataSource hikariDataSource = new HikariDataSource();
+        hikariDataSource.setUsername("sa");
+        hikariDataSource.setPassword("ding!@240");
+        hikariDataSource.setJdbcUrl("jdbc:sqlserver://10.1.98.240:1433;DatabaseName=ecology0512");
+        hikariDataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        JdbcTemplate r = new JdbcTemplate(hikariDataSource);
+        try {
+            r.update("insert into TESTT values (?)",
+                    new BigDecimal("32")
+                            .divide(new BigDecimal("8"),10,BigDecimal.ROUND_HALF_UP)
+                            .divide(new BigDecimal("22"),10,BigDecimal.ROUND_HALF_UP)
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            hikariDataSource.close();
+        }
     }
 
     private static void main5() {

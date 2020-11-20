@@ -21,55 +21,46 @@ import java.sql.Statement;
 public class Demo1 {
 
 
-
     public static void main(String[] args) {
         HikariDataSource ds = new HikariDataSource();
-        ds.setJdbcUrl("jdbc:mysql://localhost:3306/app1?useSSL=false");
+        ds.setJdbcUrl("jdbc:mysql://localhost:3306/test1?useSSL=false");
         ds.setUsername("root");
-        ds.setPassword("JKLjkl123");
+        ds.setPassword("123123123");
         ds.setAutoCommit(false);
         DataSourceProxy dataSourceProxy = new DataSourceProxy(ds);
 
-        //init seata;
         TMClient.init("test", "my_test_tx_group");
         RMClient.init("test", "my_test_tx_group");
         Undertow server = Undertow.builder()
-                .addHttpListener(8080, "localhost")
+                .addHttpListener(9001, "localhost")
                 .setHandler(exchange -> {
-                    String xidStr =  handler(dataSourceProxy);
-
-
+                    handler(dataSourceProxy);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
                     exchange.getResponseSender().send("Hello World");
                 }).build();
         server.start();
     }
 
-    private static String handler(DataSourceProxy ds) throws TransactionException {
-
-        //trx
-        String xid = "";
+    private static void handler(DataSourceProxy ds) {
         GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();
         try {
-            tx.begin(60000, "testBiz");
-            final ConnectionProxy connection1 = ds.getConnection();
-            final Statement statement = connection1.createStatement();
-            statement.execute("insert app1 values (null,'AAA')");
-            xid = RootContext.getXID();
-            connection1.commit();
-
-
-            HttpGet a = new HttpGet("http://localhost:8081");
-            a.setHeader("xid",xid);
-            CloseableHttpClient httpClient = HttpClients.createDefault();
-            httpClient.execute(a);
-
-
-            tx.commit();
-        } catch (Exception exx) {
-            tx.rollback();
+            tx.begin(60000,"test111");
+        } catch (TransactionException e) {
+            e.printStackTrace();
         }
-        return xid;
+        final String xid = RootContext.getXID();
+        Utils.closeDoing(ds::getConnection, (cnn) -> {
+            Utils.closeDoing(cnn::createStatement, (statement) -> {
+                statement.execute("insert test values (null,'DEMO1')");
 
+                HttpGet a = new HttpGet("http://localhost:9002");
+                a.setHeader("xid", xid);
+                CloseableHttpClient httpClient = HttpClients.createDefault();
+                httpClient.execute(a);
+            });
+            cnn.commit();
+            tx.commit();
+        });
     }
+
 }

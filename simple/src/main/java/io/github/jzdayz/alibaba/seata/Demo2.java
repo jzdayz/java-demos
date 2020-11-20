@@ -20,48 +20,35 @@ import java.sql.Statement;
 public class Demo2 {
 
 
-
     public static void main(String[] args) {
         HikariDataSource ds = new HikariDataSource();
-        ds.setJdbcUrl("jdbc:mysql://localhost:3306/app2?useSSL=false");
+        ds.setJdbcUrl("jdbc:mysql://localhost:3306/test2?useSSL=false");
         ds.setUsername("root");
-        ds.setPassword("JKLjkl123");
+        ds.setPassword("123123123");
         ds.setAutoCommit(false);
         DataSourceProxy dataSourceProxy = new DataSourceProxy(ds);
 
-        //init seata;
         TMClient.init("test1", "my_test_tx_group");
         RMClient.init("test1", "my_test_tx_group");
         Undertow server = Undertow.builder()
-                .addHttpListener(8081, "localhost")
+                .addHttpListener(9002, "localhost")
                 .setHandler(exchange -> {
-                    final HeaderMap requestHeaders = exchange.getRequestHeaders();
-                    final HeaderValues xid = requestHeaders.get("xid");
-                    final String xidStr = xid.getFirst();
-                    handler(xidStr,dataSourceProxy);
+                    String xid = exchange.getRequestHeaders().get("xid").getFirst();
+                    handler(xid, dataSourceProxy);
                     exchange.getResponseHeaders().put(Headers.CONTENT_TYPE, "text/plain");
                     exchange.getResponseSender().send("Hello World");
                 }).build();
         server.start();
     }
 
-    private static void handler(String xid, DataSourceProxy ds) throws TransactionException {
-
-        //trx
+    private static void handler(String xid, DataSourceProxy ds) {
         RootContext.bind(xid);
-        GlobalTransaction tx = GlobalTransactionContext.getCurrentOrCreate();
-        try {
-            tx.begin(60000, "testBiz");
-            final ConnectionProxy connection1 = ds.getConnection();
-            final Statement statement = connection1.createStatement();
-            statement.execute("insert app2 values (null,'APP2')");
-            if (1==1)
-            throw new RuntimeException();
-            connection1.rollback();
-            tx.rollback();
-        } catch (Exception exx) {
-            tx.rollback();
-        }
+        Utils.closeDoing(ds::getConnection, (cnn) -> {
+            Utils.closeDoing(cnn::createStatement, (statement) ->
+                    statement.execute("insert test values (null,'DEMO2')")
+            );
+            cnn.commit();
+        });
 
     }
 }
