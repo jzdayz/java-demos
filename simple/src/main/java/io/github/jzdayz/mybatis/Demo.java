@@ -16,9 +16,10 @@ import java.io.InputStream;
 public class Demo {
     public static void main(String[] args) throws IOException {
         try (HikariDataSource ds = new HikariDataSource()) {
-            ds.setJdbcUrl("jdbc:mysql://localhost:3306/test?useSSL=false");
+            ds.setJdbcUrl("jdbc:p6spy:mysql://localhost:3306/test1?useSSL=false");
             ds.setUsername("root");
-            ds.setPassword("JKLjkl123");
+            ds.setPassword("123123123");
+            ds.setDriverClassName("com.p6spy.engine.spy.P6SpyDriver");
             TransactionFactory transactionFactory = new JdbcTransactionFactory();
             Environment environment = new Environment("development", transactionFactory, ds);
             Configuration configuration = new Configuration(environment);
@@ -39,28 +40,32 @@ public class Demo {
                     SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)
             ) {
                 TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
-                MappedStatement mappedStatement =
-                        configuration.getMappedStatement(TestMapper.class.getName() + ".insertBase");
-                Test t1 = new Test();
-                t1.setName("name");
-                BoundSql boundSql = mappedStatement.getBoundSql(t1);
-
-                Test t2 = new Test();
-                t2.setName1("name1");
-                BoundSql boundSql2 = mappedStatement.getBoundSql(t2);
-
-                System.out.println(1);
-
+                test2(sqlSession,mapper);
             }
         }
     }
 
+    private static void test3(Configuration configuration) {
+        MappedStatement mappedStatement =
+                configuration.getMappedStatement(TestMapper.class.getName() + ".insertBase");
+        Test t1 = new Test();
+        t1.setName("name");
+        BoundSql boundSql = mappedStatement.getBoundSql(t1);
+
+        Test t2 = new Test();
+        t2.setName1("name1");
+        t2.setName("1111");
+        BoundSql boundSql2 = mappedStatement.getBoundSql(t2);
+
+        System.out.println(1);
+    }
+
     private static void test2(SqlSession sqlSession, TestMapper mapper) {
         Test test1 = new Test();
-        test1.setName("name");
+        test1.setName("name222");
         mapper.insertBase(test1);
         Test test2 = new Test();
-        test2.setName1("name1");
+        test2.setName("name11111");
         mapper.insertBase(test2);
         sqlSession.flushStatements();
         sqlSession.commit();

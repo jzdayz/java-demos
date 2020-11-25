@@ -10,3 +10,9 @@ spring:
 test:
   schedule:
     delay: 9000
+
+my:
+  test:
+    name: 小明
+  test1:
+    age: 17

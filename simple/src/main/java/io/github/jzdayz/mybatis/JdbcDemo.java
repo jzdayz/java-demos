@@ -15,9 +15,27 @@ import java.util.Map;
 
 public class JdbcDemo {
     public static void main(String[] args) {
-        String costType = "通讯费,外埠差旅费,市内租赁费,市内住宿费,市内交通费,办公杂费,招待费,专家费,测试费,资质管理费,专线费,会务费,业务宣传费,工作餐费";
-        Arrays.stream(costType.split(","))
-                .forEach(e-> System.out.println("insert into pm_cost_type values (null,'"+e+"');"));
+//        String costType = "通讯费,外埠差旅费,市内租赁费,市内住宿费,市内交通费,办公杂费,招待费,专家费,测试费,资质管理费,专线费,会务费,业务宣传费,工作餐费";
+//        Arrays.stream(costType.split(","))
+//                .forEach(e-> System.out.println("insert into pm_cost_type values (null,'"+e+"');"));
+        test5();
+    }
+
+    private static void test5() {
+        List<LinkedHashMap<Integer, String>> sheet1 = EasyExcel.read("/Users/huqingfeng/Downloads/1.xlsx")
+                .sheet("Sheet1")
+                .doReadSync();
+
+        String sql = "insert into e9_fields values (null,'%s','%s','%s','pm_track');";
+
+        for (LinkedHashMap<Integer, String> obj : sheet1) {
+
+            String test_id = obj.get(0);
+            String pro_id = obj.get(2);
+            String field_name = obj.get(1);
+            System.out.printf((sql) + "%n",test_id,pro_id,field_name);
+        }
+
     }
 
     private static void test3() {
