@@ -7,11 +7,33 @@ import org.apache.commons.vfs2.FileSystemOptions;
 import org.apache.commons.vfs2.impl.StandardFileSystemManager;
 import org.apache.commons.vfs2.provider.sftp.SftpFileSystemConfigBuilder;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 public class Demo {
 
     public static void main(String[] args) throws Exception {
+        test3();
+    }
+
+    private static void test3() throws Exception{
+        try (
+                StandardFileSystemManager fsManager = new StandardFileSystemManager()
+        ) {
+            fsManager.init();
+            FileSystemOptions options = new FileSystemOptions();
+            SftpFileSystemConfigBuilder.getInstance().setUserDirIsRoot(options, false);
+            FileObject file = fsManager
+                    .resolveFile("sftp://root:googleJKLjkl123@jzdayz.club/", options);
+
+            for (FileObject child : file.getChildren()) {
+                System.out.println(child.getName().getPath());
+            }
+
+        }
+    }
+
+    private static void test2() throws IOException {
         try (
                 StandardFileSystemManager fsManager = new StandardFileSystemManager()
         ) {
@@ -28,7 +50,6 @@ public class Demo {
 
             System.out.println(new String(bytes));
         }
-
     }
 
     public static FileSystemOptions createDefaultOptions() throws FileSystemException {
