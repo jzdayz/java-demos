@@ -35,13 +35,19 @@ public class Demo {
                 xmlParser.parse();
             }
 
-
             try (
-                    SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)
-            ) {
-                TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
-                test2(sqlSession,mapper);
+                    final SqlSession sqlSession = sqlSessionFactory.openSession();
+                    ){
+                final TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
+                System.out.println(mapper.one().orElse(null));;
             }
+
+//            try (
+//                    SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)
+//            ) {
+//                TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
+//                test2(sqlSession,mapper);
+//            }
         }
     }
 

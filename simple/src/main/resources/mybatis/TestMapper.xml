@@ -6,6 +6,9 @@
     <select id="all" resultType="io.github.jzdayz.mybatis.Test">
         select * from test
     </select>
+    <select id="one" resultType="io.github.jzdayz.mybatis.Test">
+        select * from test limit 1
+    </select>
     <select id="map" resultType="map">
         select * from test where id = #{id}
     </select>

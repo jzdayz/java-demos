@@ -12,4 +12,5 @@ include 'spring-webflux'
 include 'spring-security'
 include 'java-agent'
 include 'jdk-reflect'
+include 'simple2'
 
