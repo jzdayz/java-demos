@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 public class NioServerDemo {
     public static void main(String[] args) {
         NioServer ni = new NioServer("0.0.0.0", 40404, (sc) -> {
-            ByteBuffer bb = ByteBuffer.allocate(1024);
+            ByteBuffer bb = ByteBuffer.allocate(10);
             try {
                 final int read = sc.read(bb);
                 if (read > 0) {
