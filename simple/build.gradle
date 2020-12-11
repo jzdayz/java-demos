@@ -15,7 +15,6 @@ dependencies {
     implementation 'org.quartz-scheduler:quartz:2.3.2'
     implementation 'org.apache.commons:commons-configuration2:2.7'
     implementation 'commons-beanutils:commons-beanutils:1.9.4'
-    implementation 'com.microsoft.sqlserver:mssql-jdbc:8.2.2.jre8'
     implementation 'org.apache.commons:commons-digester3:3.2'
     implementation 'com.oracle.ojdbc:ojdbc8:19.3.0.0'
     implementation 'io.vertx:vertx-web:3.9.3'
