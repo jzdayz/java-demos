@@ -12,6 +12,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
@@ -39,7 +41,11 @@ public class Demo {
                     final SqlSession sqlSession = sqlSessionFactory.openSession();
                     ){
                 final TestMapper mapper = configuration.getMapper(TestMapper.class, sqlSession);
-                System.out.println(mapper.one().orElse(null));;
+                Map<String,String> rs = new HashMap<>();
+                mapper.mapAll(resultContext -> {
+                    Test t = resultContext.getResultObject();
+                    System.out.println(t);
+                });
             }
 
 //            try (

@@ -29,7 +29,7 @@ public class PoolTests {
         }, c);
         final TestBean testBean = pool.borrowObject();
         System.out.println(testBean);
-        pool.returnObject(testBean);
+//        pool.returnObject(testBean);
         final TestBean testBean1 = pool.borrowObject();
         System.out.println(testBean1);
         System.out.println(pool.getNumActive());

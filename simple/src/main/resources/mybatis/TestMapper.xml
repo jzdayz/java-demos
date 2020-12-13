@@ -16,6 +16,10 @@
         INSERT INTO `test`.`test`(`id`, `name`) VALUES (null, #{name});
     </insert>
 
+    <select id="mapAll" resultType="io.github.jzdayz.mybatis.Test">
+        select * from test
+    </select>
+
     <insert id="insertBase">
         INSERT INTO test
         <trim prefix="(" suffix=")" suffixOverrides=",">

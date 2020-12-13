@@ -21,7 +21,7 @@ public class Demo {
         System.out.println(1);
         final TestBean testBean = gop.borrowObject();
         System.out.println(testBean);
-        gop.returnObject(testBean);
+//        gop.returnObject(testBean);
         final TestBean testBean1 = gop.borrowObject();
         System.out.println(testBean1);
     }
