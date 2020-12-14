@@ -59,6 +59,9 @@ subprojects {
 
     if (boot.contains(project.name)) {
         apply plugin: 'org.springframework.boot'
+        bootJar {
+            enabled = false
+        }
         if (cloud.contains(project.name)) {
 
         }
