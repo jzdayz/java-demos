@@ -7,14 +7,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController("/")
-public class Demo {
+public class Demo1 {
     public static void main(String[] args) {
         System.setProperty("server.port", "50506");
-        SpringApplication.run(Demo.class, args);
+        SpringApplication.run(Demo1.class, args);
     }
 
     @GetMapping("test")
     public Object test() {
         return "hello1";
+    }
+
+    @GetMapping("ping")
+    public Object test1(){
+        return "PONG";
     }
 }
