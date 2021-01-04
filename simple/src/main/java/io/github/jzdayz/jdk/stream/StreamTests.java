@@ -1,22 +1,29 @@
 package io.github.jzdayz.jdk.stream;
 
 
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamTests {
 
     public static void main(String[] args) {
 
+        List<String> a1 = Arrays.asList(
+                "1", "2", "3", "4", "5"
+        );
 
-        Stream.of("1", "2", "3", "4")
-                .parallel()
-                .forEachOrdered(k -> {
-                    System.out.println(k);
-                    System.out.println(Thread.currentThread().getName());
-                });
+        List<String> a2 = Arrays.asList(
+                "11", "22", "33", "44", "55"
+        );
 
+        List<List<String>> rs = new ArrayList<>();
 
-        System.out.println(1);
+        rs.add(a1);
+        rs.add(a2);
+
+        rs.parallelStream().flatMap(List::stream).collect(Collectors.toList());
 
     }
 
