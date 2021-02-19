@@ -3,6 +3,8 @@ package io.github.jzdayz.jdk.type;
 import org.apache.ibatis.reflection.TypeParameterResolver;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tests {
@@ -19,7 +21,11 @@ public class Tests {
         final Method t1 = B.class.getDeclaredMethod("list");
         t1.setAccessible(true);
         // String.class
-        TypeParameterResolver.resolveReturnType(t1,C.class);
+        Type type = TypeParameterResolver.resolveReturnType(t1, C.class);
+        System.out.println(type);
+
+
+        List<String> list = new ArrayList<>();
     }
 
 }
