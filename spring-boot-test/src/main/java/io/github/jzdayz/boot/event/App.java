@@ -36,18 +36,18 @@ public class App {
     }
 
     public static void main(String[] args) {
-        new GenericApplicationListenerAdapter(new MyApplicationEventLis());
-//        SpringApplication springApplication = new SpringApplication(App.class);
-//        springApplication.setWebApplicationType(WebApplicationType.NONE);
-//
-//        try (
-//                ConfigurableApplicationContext run = springApplication.run(args)
-//                ){
-//
-//            MyApplicationEvent m = new MyApplicationEvent("1");
-//            run.publishEvent(m);
-//        }catch (Exception e){
-//            throw new RuntimeException(e);
-//        }
+//        new GenericApplicationListenerAdapter(new MyApplicationEventLis());
+        SpringApplication springApplication = new SpringApplication(App.class);
+        springApplication.setWebApplicationType(WebApplicationType.NONE);
+
+        try (
+                ConfigurableApplicationContext run = springApplication.run(args)
+                ){
+
+            MyApplicationEvent m = new MyApplicationEvent("1");
+            run.publishEvent(m);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }
