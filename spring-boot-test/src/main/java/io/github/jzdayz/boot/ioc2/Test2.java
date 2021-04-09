@@ -10,6 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("ALL")
 @SpringBootApplication
 public class Test2 {
     public static void main(String[] args) throws InterruptedException {

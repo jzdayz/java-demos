@@ -1,20 +1,21 @@
 package io.github.jzdayz.apache.redis;
 
-import io.lettuce.core.RedisClient;
-import io.lettuce.core.api.StatefulRedisConnection;
-import io.lettuce.core.api.sync.RedisSetCommands;
+import io.lettuce.core.api.sync.RedisStringCommands;
+import io.lettuce.core.cluster.RedisClusterClient;
+import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 
 public class RedisDemo {
     public static void main(String[] args) {
-        RedisClient client = RedisClient.create("redis://localhost:6379");
+        RedisClusterClient client = RedisClusterClient.create("redis://localhost:7001");
         try (
-                StatefulRedisConnection<String, String> connection = client.connect()
-                ){
-            RedisSetCommands<String,String> sync = connection.sync();
-            Boolean test1 = sync.sismember("test1", "2");
-            System.err.println(test1);
+                StatefulRedisClusterConnection<String, String> connect = client.connect()
+        ){
+            RedisStringCommands<String,String> sync = connect.sync();
+            System.out.println(sync.get("111"));
+        }finally {
+            client.shutdown();
         }
-        client.shutdown();
+
 
 
     }

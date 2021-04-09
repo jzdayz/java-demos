@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cd-project
+  cloud:
+    nacos:
+      config:
+        server-addr: 10.1.:8841
+        file-extension: yaml

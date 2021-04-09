@@ -4,6 +4,8 @@ spring:
     database: 0
     port: 6379
     timeout: 1H
+  profiles:
+    active: prod
 #  banner:
 #    image:
 #      location: classpath:banner.png
