@@ -1,5 +1,9 @@
 package io.github.jzdayz.apache.es;
 
+import io.undertow.Undertow;
+import io.undertow.io.Sender;
+import io.undertow.server.HttpHandler;
+import io.undertow.server.HttpServerExchange;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.get.GetRequest;
@@ -15,33 +19,31 @@ import java.io.IOException;
 
 @Slf4j
 public class EsDemo {
-    public static void main(String[] args) throws Exception{
-
-        RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
-        get(client);
+    public static void main(String[] args) throws Exception {
+        RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(
+                new HttpHost("localhost", 9400, "http")
+        ));
+        System.out.println(get(client));;
     }
 
-    private static void get(RestHighLevelClient client) throws Exception{
+    private static String get(RestHighLevelClient client) throws Exception {
         GetRequest request = new GetRequest(
-                "posts","doc","1"
+                "posts", "doc", "3"
         );
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
-        System.out.println(response.getSourceAsString());
+        return response.getSourceAsString();
     }
 
     private static void index(RestHighLevelClient client) throws IOException {
         IndexRequest request = new IndexRequest(
                 "posts",
                 "doc",
-                "1");
+                "3");
         String jsonString = "{" +
-                "\"user\":\"kimchy\"," +
-                "\"postDate\":\"2013-01-30\"," +
-                "\"message\":\"trying out Elasticsearch\"" +
+                "\"user\":\"dd!!!!\"" +
                 "}";
         request.source(jsonString, XContentType.JSON);
         IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
-
         System.out.println(indexResponse.status());
     }
 }
