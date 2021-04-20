@@ -21,17 +21,19 @@ import java.io.IOException;
 public class EsDemo {
     public static void main(String[] args) throws Exception {
         RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(
-                new HttpHost("localhost", 9400, "http")
+                new HttpHost("", 9700, "http"),
+                new HttpHost("", 9800, "http"),
+                new HttpHost("", 9900, "http")
         ));
-        System.out.println(get(client));;
+        index(client);
     }
 
-    private static String get(RestHighLevelClient client) throws Exception {
+    private static void get(RestHighLevelClient client) throws Exception {
         GetRequest request = new GetRequest(
                 "posts", "doc", "3"
         );
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
-        return response.getSourceAsString();
+        System.out.println(response.getSourceAsString());
     }
 
     private static void index(RestHighLevelClient client) throws IOException {

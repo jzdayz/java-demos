@@ -11,4 +11,5 @@ dependencies {
     implementation 'net.logstash.logback:logstash-logback-encoder:6.6'
     implementation 'io.undertow:undertow-core:2.2.7.Final'
 //    implementation 'com.lmax:disruptor:3.4.2'
+    implementation 'com.alibaba.otter:canal.client:1.1.4'
 }

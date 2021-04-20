@@ -8,17 +8,17 @@
         </encoder>
     </appender>
 
-    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <!--可以访问的logstash日志收集端口-->
-        <destination>localhost:4560</destination>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
-            <!--自定义字段，区分应用名称-->
-            <customFields>{"appname":"logdemo"}</customFields>
-        </encoder>
-    </appender>
+<!--    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        &lt;!&ndash;可以访问的logstash日志收集端口&ndash;&gt;-->
+<!--        <destination>localhost:4560</destination>-->
+<!--        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--            &lt;!&ndash;自定义字段，区分应用名称&ndash;&gt;-->
+<!--            <customFields>{"appname":"logdemo"}</customFields>-->
+<!--        </encoder>-->
+<!--    </appender>-->
 
     <root level="info">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="LOGSTASH" />
+<!--        <appender-ref ref="LOGSTASH" />-->
     </root>
 </configuration>
