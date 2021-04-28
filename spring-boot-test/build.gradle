@@ -1,11 +1,11 @@
 dependencies {
+    runtimeOnly 'org.apache.derby:derby'
+    implementation 'com.h2database:h2:1.4.183'
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    runtimeOnly 'org.apache.derby:derby'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.1'
-
-
     implementation 'com.fasterxml.jackson.core:jackson-core:2.11.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
+    implementation 'org.activiti:activiti-spring-boot-starter-basic:6.0.0'
 }
